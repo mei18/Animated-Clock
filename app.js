@@ -105,6 +105,8 @@ function init() {
     setTimeout(clock, 1000);
     let theDate = new Date();
     seconds(theDate);
+    minute(theDate);
+    hour(theDate);
   }
   clock();
 
@@ -116,7 +118,31 @@ function init() {
     context.moveTo(300, 288);
     //En esta linea estabas moviendo la coordenada Y de lineTo a -1000, por eso se ve que se dibuja hacia arriba. Recuerda que  el canvas -Y es hacia arriba.
     // context.lineTo(290, -1000);
-    context.lineTo(290, 100);
+    context.lineTo(300, 130);
+    context.stroke();
+    context.closePath();
+  }
+
+  function minute(theDate) {
+    let min = theDate.getMinutes() + theDate.getSeconds() / 60;
+    context.save();
+    context.beginPath();
+    context.lineWidth = 4;
+    context.strokeStyle = 'black';
+    context.moveTo(300, 288);
+    context.lineTo(300, 145);
+    context.stroke();
+    context.closePath();
+  }
+
+  function hour(theDate) {
+    let hour = theDate.getHours() + theDate.getMinutes() / 60;
+    context.save();
+    context.beginPath();
+    context.lineWidth = 4;
+    context.strokeStyle = 'black';
+    context.moveTo(300, 288);
+    context.lineTo(320, 180);
     context.stroke();
     context.closePath();
   }
