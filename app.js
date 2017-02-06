@@ -6,6 +6,9 @@ function init() {
   canvas.height = window.innerHeight;
   document.body.appendChild(canvas);
   let context = canvas.getContext('2d');
+  var theDate = new Date();
+  var sec = theDate.getSeconds();
+
 
   //dibujar reloj
   //horilla negra
@@ -102,48 +105,60 @@ function init() {
   numbers();
 
   function clock() {
-    setTimeout(clock, 1000);
-    let theDate = new Date();
+
+    // hour(theDate);
+    // minute(theDate);
     seconds(theDate);
-    minute(theDate);
-    hour(theDate);
+    console.log(sec);
+
   }
-  clock();
+  setInterval(clock(), 1000);
 
+
+  //radianes
+  function degreesToRadians(degrees) {
+    return  degrees * Math.PI / 180;
+  }
+  //segundos
   function seconds(theDate) {
-    let seconds = theDate.getSeconds();
 
+    context.save();
     context.beginPath();
     context.strokeStyle = 'red';
     context.moveTo(300, 288);
-    //En esta linea estabas moviendo la coordenada Y de lineTo a -1000, por eso se ve que se dibuja hacia arriba. Recuerda que  el canvas -Y es hacia arriba.
-    // context.lineTo(290, -1000);
     context.lineTo(300, 130);
+    context.rotate(degreesToRadians(seconds * 13));
     context.stroke();
     context.closePath();
+    context.restore();
   }
-
-  function minute(theDate) {
-    let min = theDate.getMinutes() + theDate.getSeconds() / 60;
-    context.save();
-    context.beginPath();
-    context.lineWidth = 4;
-    context.strokeStyle = 'black';
-    context.moveTo(300, 288);
-    context.lineTo(300, 145);
-    context.stroke();
-    context.closePath();
-  }
-
-  function hour(theDate) {
-    let hour = theDate.getHours() + theDate.getMinutes() / 60;
-    context.save();
-    context.beginPath();
-    context.lineWidth = 4;
-    context.strokeStyle = 'black';
-    context.moveTo(300, 288);
-    context.lineTo(320, 180);
-    context.stroke();
-    context.closePath();
-  }
+  //minutos
+  // function minute(theDate) {
+  //   let min = theDate.getMinutes() + theDate.getSeconds() / 60;
+  //   context.save();
+  //   context.beginPath();
+  //   context.lineWidth = 4;
+  //   context.strokeStyle = 'black';
+  //   context.rotate( degreesToRadians(min * 6));
+  //   context.moveTo(300, 288);
+  //   context.lineTo(300, 145);
+  //   context.stroke();
+  //   context.closePath();
+  //   context.restore();
+  // }
+  //
+  // function hour(theDate) {
+  //   let hour = theDate.getHours() + theDate.getMinutes() / 60;
+  //   let degrees = (hour * 360 / 12) % 360
+  //   context.save();
+  //   context.beginPath();
+  //   context.lineWidth = 4;
+  //   context.strokeStyle = 'black';
+  //   context.rotate( degreesToRadians(degrees));
+  //   context.moveTo(300, 288);
+  //   context.lineTo(320, 180);
+  //   context.stroke();
+  //   context.closePath();
+  //   context.restore();
+  // }
 }
