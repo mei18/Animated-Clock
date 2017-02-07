@@ -207,5 +207,3 @@ function init() {
   //   context.restore();
   // }
 }
-
-//comit test
