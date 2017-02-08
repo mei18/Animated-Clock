@@ -21,7 +21,7 @@ function init() {
   setHour(hr);
 
   let intervalId = setInterval(clock, 1000);
-
+//funcion para llamar las otras funciones y crear el reloj
   function clock() {
     sec++;
 
@@ -145,28 +145,22 @@ function init() {
   function setSeconds(sec) {
 
     console.log(sec);
-
-    context.save();
     //translate para mover el contexto
     context.translate(xpos, ypos);
     context.rotate(degreesToRadians(sec * 6));
     context.beginPath();
     context.strokeStyle = 'red';
-    // context.moveTo(300, 288);
-    // context.lineTo(300, 130);
     context.lineWidth = 3;
     //ubicarlo en el centro del contexto
     context.moveTo(0, 0);
+    //-150 es el largo de la manilla
     context.lineTo(0, -150);
     context.stroke();
     context.closePath();
     context.resetTransform();
-    context.restore();
   }
   //minutos
   function setMinute(min) {
-
-    context.save();
     context.translate(xpos, ypos);
     context.rotate( degreesToRadians(min * 6));
     context.beginPath();
@@ -178,11 +172,9 @@ function init() {
     context.stroke();
     context.closePath();
     context.resetTransform();
-    context.restore();
   }
   //horas
   function setHour(hr) {
-    context.save();
     context.translate(xpos, ypos);
     context.rotate( degreesToRadians(degrees));
     context.beginPath();
@@ -194,6 +186,5 @@ function init() {
     context.stroke();
     context.closePath();
     context.resetTransform();
-    context.restore();
   }
 }
